@@ -16,6 +16,7 @@ public class SheepInitiator : MonoBehaviour {
         {
             GameObject sheep = Instantiate(sheepModel);
             sheep.GetComponent<SheepAI>().target = GameObject.FindGameObjectWithTag("Cursor");
+            sheep.GetComponent<SheepAI>().moveSpeed = Random.Range(0.5f, 1.0f);
             sheep.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 1);
         }
 	}
