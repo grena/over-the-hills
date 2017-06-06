@@ -6,7 +6,7 @@ public class DestroyOnInvisible : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        Destroy(gameObject);
+		Destroy(transform.root.gameObject);
     }
 
 }

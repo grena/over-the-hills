@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreesGenerator : MonoBehaviour {
+public class ObstaclesGenerator : MonoBehaviour {
 
     public GameObject[] obstacleModels;
     public int maxObstacles;
 
     private List<GameObject> obstacles;
-    private int count = 0;
 
     // Use this for initialization
     void Start () {
@@ -19,7 +18,7 @@ public class TreesGenerator : MonoBehaviour {
 	void Update () {
         obstacles.RemoveAll(item => item == null);
 
-        if (count < maxObstacles)
+		if (obstacles.Count < maxObstacles)
         {
             CreateNewObstacle();
         }
@@ -30,11 +29,9 @@ public class TreesGenerator : MonoBehaviour {
         int index = Random.Range(0, obstacleModels.Length);
         GameObject obstacle = Instantiate(obstacleModels[index]);
 
-        Vector3 pos = new Vector3(Camera.main.transform.position.x + Random.Range(5f, 10f), Random.Range(-5f, 5f), 0f);
+        Vector3 pos = new Vector3(Camera.main.transform.position.x + Random.Range(5f, 10f), Random.Range(-3f, 3f), 0f);
         obstacle.transform.position = pos;
 
-        count++;
-
-        //obstacles.Add(obstacle);
+        obstacles.Add(obstacle);
     }
 }

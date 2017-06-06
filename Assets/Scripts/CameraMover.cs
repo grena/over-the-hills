@@ -11,7 +11,7 @@ public class CameraMover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		target = new Vector3 (100, 0, -10);
+		target = new Vector3 (50000, 0, -10);
 	}
 
 	// Update is called once per frame
