@@ -52,7 +52,7 @@ public class SheepAI : MonoBehaviour {
     void Flee(GameObject wolf)
     {
         //Debug.Log("FLEEING WOLF AT " + wolf.transform.position);
-        Vector3 vectorToFleeTarget = (wolf.transform.position + transform.position);
+		Vector3 vectorToFleeTarget = (transform.position - wolf.transform.position);
         Vector3 newAccelerationVector = vectorToFleeTarget.normalized * moveSpeed;
 
         //Debug.Log("NEW VECTOR = " + newAccelerationVector);
