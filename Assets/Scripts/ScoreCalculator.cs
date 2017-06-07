@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class ScoreCalculator : MonoBehaviour {
 
-	public int score = 0;
+    public int dodgedWolves = 0;
 
+    private bool gameEnded = false;
     private Text textGUI;
+    private int distance = 0;
+    private int remainingSheeps = 0;    
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +20,27 @@ public class ScoreCalculator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        int score = (int) Math.Round(Camera.main.transform.position.x, 0) * 10;
-        textGUI.text = "Score: " + score;
-	}
+        distance = (int) Math.Round(Camera.main.transform.position.x, 0) * 10;
+        remainingSheeps = GameObject.FindGameObjectsWithTag("Sheep").Length;
+
+        textGUI.text = "Distance: " + distance;
+        textGUI.text += "      Remaining sheeps: " + remainingSheeps;
+        textGUI.text += "      Dodged wolves: " + dodgedWolves;
+
+        if (!gameEnded && remainingSheeps == 0)
+        {
+            EndGame();
+        }
+    }
+
+    void EndGame()
+    {
+        CameraMover moverScript = GetComponent<CameraMover>();
+        moverScript.enabled = false;
+
+        int score = distance + dodgedWolves * 250;
+
+        GameObject.Find("IntroText").GetComponent<Text>().text = "SCORE: " + score;
+        GameObject.Find("IntroText").GetComponent<Text>().enabled = true;
+    }
 }

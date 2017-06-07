@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroPlayer : MonoBehaviour {
 
@@ -13,8 +14,9 @@ public class IntroPlayer : MonoBehaviour {
 		AudioSource audio = GetComponent<AudioSource>();
 		audio.clip = introMusic;
 		audio.Play ();
+        audio.time = 2;
 
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(15);
 
 		// Destroy fence
 		audio.clip = destroySound;
@@ -23,16 +25,22 @@ public class IntroPlayer : MonoBehaviour {
 		GameObject fence = GameObject.Find("MainFrontFence");
 		Destroy (fence);
 
-		yield return new WaitForSeconds(audio.clip.length + 2);
+		yield return new WaitForSeconds(audio.clip.length - 0.5f);
 
 		// Start game!
 		CameraMover moverScript = GetComponent<CameraMover>();
 		moverScript.enabled = true;
 
-		audio.clip = gameMusic;
-		audio.Play ();
-		audio.time = 28;
+        GameObject.Find("IntroText").GetComponent<Text>().enabled = true;
+        GameObject.Find("ScoreText").GetComponent<Text>().enabled = true;
 
-		// Display message to "ESCAPE!"
-	}
+        audio.clip = gameMusic;
+		audio.Play ();
+		audio.time = 27;
+        audio.volume = 0.7f;
+
+        yield return new WaitForSeconds(4);
+
+        GameObject.Find("IntroText").GetComponent<Text>().enabled = false;
+    }
 }

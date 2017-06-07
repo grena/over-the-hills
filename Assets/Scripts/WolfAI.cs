@@ -69,4 +69,9 @@ public class WolfAI : MonoBehaviour {
             Destroy(col.gameObject);
         }
     }
+
+    void OnDestroy()
+    {
+        GameObject.Find("GameLogic").GetComponent<ScoreCalculator>().dodgedWolves++;
+    }
 }
