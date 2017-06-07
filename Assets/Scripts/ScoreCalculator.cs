@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ScoreCalculator : MonoBehaviour {
 
+	public int score = 0;
+
     private Text textGUI;
 
 	// Use this for initialization
