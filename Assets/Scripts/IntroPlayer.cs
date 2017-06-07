@@ -11,7 +11,7 @@ public class IntroPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
-		AudioSource audio = GetComponent<AudioSource>();
+        AudioSource audio = GetComponent<AudioSource>();
 		audio.clip = introMusic;
 		audio.Play ();
         audio.time = 2;
@@ -37,7 +37,7 @@ public class IntroPlayer : MonoBehaviour {
         audio.clip = gameMusic;
 		audio.Play ();
 		audio.time = 27;
-        audio.volume = 0.7f;
+        audio.volume = 0.5f;
 
         yield return new WaitForSeconds(4);
 

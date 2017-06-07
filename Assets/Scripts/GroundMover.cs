@@ -9,6 +9,7 @@ public class GroundMover : MonoBehaviour {
 
     private GameObject ground1;
     private GameObject ground2;
+    private GameObject ground3;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +25,7 @@ public class GroundMover : MonoBehaviour {
 		if (Time.time > 2 && ground1 == null)
         {
             ground1 = ground2;
+            ground2 = ground3;
             InstantiateGroundNextTo(ground1);
         }
         
@@ -33,5 +35,8 @@ public class GroundMover : MonoBehaviour {
     {
         ground2 = Instantiate(groundModel);
         ground2.transform.position = new Vector3(ground.transform.position.x + 10, 0f, 2f);
+
+        ground3 = Instantiate(groundModel);
+        ground3.transform.position = new Vector3(ground2.transform.position.x + 10, 0f, 2f);
     }
 }

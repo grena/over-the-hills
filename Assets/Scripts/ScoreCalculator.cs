@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
 public class ScoreCalculator : MonoBehaviour {
@@ -31,10 +32,20 @@ public class ScoreCalculator : MonoBehaviour {
         {
             EndGame();
         }
+
+        if (gameEnded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("Evasion");
+            }
+        }
     }
 
     void EndGame()
     {
+        gameEnded = true;
+
         CameraMover moverScript = GetComponent<CameraMover>();
         moverScript.enabled = false;
 

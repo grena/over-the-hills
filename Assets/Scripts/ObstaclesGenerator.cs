@@ -35,7 +35,7 @@ public class ObstaclesGenerator : MonoBehaviour {
         int index = UnityEngine.Random.Range(0, obstacleModels.Length);
         GameObject obstacle = Instantiate(obstacleModels[index]);
 
-        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(5f, 10f), UnityEngine.Random.Range(-3f, 3f), 0f);
+        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(8f, 13f), UnityEngine.Random.Range(-3f, 3f), 0f);
         obstacle.transform.position = pos;
 
         obstacles.Add(obstacle);
@@ -46,7 +46,7 @@ public class ObstaclesGenerator : MonoBehaviour {
         Debug.Log("POPULATE WOLF");
         GameObject wolf = Instantiate(wolfModel);
 
-        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(5f, 10f), UnityEngine.Random.Range(-3f, 3f), 0f);
+        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(8f, 13f), UnityEngine.Random.Range(-3f, 3f), 0f);
         wolf.transform.position = pos;
     }
 
@@ -59,7 +59,6 @@ public class ObstaclesGenerator : MonoBehaviour {
             if (noWolf)
             {
                 float rand = UnityEngine.Random.Range(0f, 100f);
-                Debug.Log("THE RAND = " + rand);
                 if (rand < percentChanceWolf)
                 {
                     CreateWolf();
