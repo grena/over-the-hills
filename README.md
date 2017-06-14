@@ -3,7 +3,7 @@
 I made this mini game for the **Akeneo Game Jam #4**, for the theme "Evasion". 
 We had 2 weeks to do this game on our free time, I'd says I spent something like 6 evenings, so a bit less than 48h.
 
-You can either download the game for Windows, or play it via web (can be slow...).
+You can either [download the game for Windows](https://github.com/grena/over-the-hills/releases/download/1.0/OverTheHills-1.0.zip), or [play it via web](http://www.grena.fr/over-the-hills/) (can be slow...).
 
 ## Tools
 - [Unity](https://unity3d.com)
