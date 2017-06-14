@@ -24,11 +24,11 @@ public class ScoreCalculator : MonoBehaviour {
         distance = (int) Math.Round(Camera.main.transform.position.x, 0) * 10;
         remainingSheeps = GameObject.FindGameObjectsWithTag("Sheep").Length;
 
-        textGUI.text = "Distance: " + distance;
-        textGUI.text += "      Remaining sheeps: " + remainingSheeps;
-        textGUI.text += "      Dodged wolves: " + dodgedWolves;
+        textGUI.text = "Freedom in: " + (2000 - distance) + " meters";
+        textGUI.text += " • Sheeps: " + remainingSheeps;
+        textGUI.text += " • Dodged wolves: " + dodgedWolves;
 
-        if (!gameEnded && remainingSheeps == 0)
+        if (!gameEnded && (remainingSheeps == 0 || distance == 2000))
         {
             EndGame();
         }
@@ -49,7 +49,7 @@ public class ScoreCalculator : MonoBehaviour {
         CameraMover moverScript = GetComponent<CameraMover>();
         moverScript.enabled = false;
 
-        int score = distance + dodgedWolves * 250;
+        int score = distance + dodgedWolves * 250 + remainingSheeps * 50;
 
         GameObject.Find("IntroText").GetComponent<Text>().text = "SCORE: " + score;
         GameObject.Find("IntroText").GetComponent<Text>().enabled = true;

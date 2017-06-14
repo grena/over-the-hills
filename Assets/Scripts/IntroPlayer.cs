@@ -11,25 +11,30 @@ public class IntroPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
+        
         AudioSource audio = GetComponent<AudioSource>();
+        
 		audio.clip = introMusic;
 		audio.Play ();
-        audio.time = 2;
 
-		yield return new WaitForSeconds(15);
+		yield return new WaitForSeconds(10);
 
-		// Destroy fence
-		audio.clip = destroySound;
+        // Destroy fence
+        audio.clip = destroySound;
 		audio.Play();
 
 		GameObject fence = GameObject.Find("MainFrontFence");
 		Destroy (fence);
 
 		yield return new WaitForSeconds(audio.clip.length - 0.5f);
+        
 
 		// Start game!
 		CameraMover moverScript = GetComponent<CameraMover>();
 		moverScript.enabled = true;
+
+        ObstaclesGenerator obstaclesScript = GetComponent<ObstaclesGenerator>();
+        obstaclesScript.enabled = true;
 
         GameObject.Find("IntroText").GetComponent<Text>().enabled = true;
         GameObject.Find("ScoreText").GetComponent<Text>().enabled = true;
@@ -37,7 +42,6 @@ public class IntroPlayer : MonoBehaviour {
         audio.clip = gameMusic;
 		audio.Play ();
 		audio.time = 27;
-        audio.volume = 0.5f;
 
         yield return new WaitForSeconds(4);
 
