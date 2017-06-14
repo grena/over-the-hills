@@ -20,14 +20,13 @@ public class WolfAI : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        FindNearestTarget();
+
         if (target != null)
         {
             MoveToTarget();
-        }
-        else
-        {
-            WaitForTarget();
         }
     }
 
@@ -47,13 +46,23 @@ public class WolfAI : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
     }
 
-    void WaitForTarget()
+    void FindNearestTarget()
     {
         GameObject[] sheeps = GameObject.FindGameObjectsWithTag("Sheep");
 
         foreach (GameObject sheep in sheeps)
         {
-            if (Vector3.Distance(sheep.transform.position, transform.position) <= detectionRadius)
+            float sheepDistance = Vector3.Distance(sheep.transform.position, transform.position);
+            bool isDetected = sheepDistance <= detectionRadius;
+            bool isNearest = true;
+
+            if (target != null)
+            {
+                float currentTargetDistance = Vector3.Distance(target.transform.position, transform.position);
+                isNearest = sheepDistance < currentTargetDistance;
+            }
+
+            if (isDetected && isNearest)
             {
                 target = sheep;
                 break;
@@ -63,7 +72,6 @@ public class WolfAI : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        //Debug.Log("DESTROYING !!!");
         if (col.gameObject.CompareTag("Sheep"))
         {
             Destroy(col.gameObject);
