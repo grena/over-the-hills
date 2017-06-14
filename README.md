@@ -1,3 +1,5 @@
+![](http://i.imgur.com/vO5DuPb.png)
+
 ## Over The Hills
 
 I made this mini game for the **Akeneo Game Jam #4**, for the theme "Evasion". 
