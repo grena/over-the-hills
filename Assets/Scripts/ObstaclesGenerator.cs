@@ -7,7 +7,9 @@ public class ObstaclesGenerator : MonoBehaviour {
 
     public GameObject[] obstacleModels;
     public GameObject wolfModel;
-    public int maxObstacles;
+
+    public float intervalSecondTree = 1f;
+    public int maxTreesPerBatch = 5;
     public float intervalSecondWolf = 4f;
     public float percentChanceWolf = 10f;
 
@@ -18,19 +20,24 @@ public class ObstaclesGenerator : MonoBehaviour {
         obstacles = new List<GameObject>();
 
         StartCoroutine("TryToPutWolf");
+        StartCoroutine("PopulateTrees");
     }
 	
 	// Update is called once per frame
 	void Update () {
         obstacles.RemoveAll(item => item == null);
-
-		if (obstacles.Count < maxObstacles)
-        {
-            CreateNewObstacle();
-        }
     }
 
-    void CreateNewObstacle()
+    void CreateWolf()
+    {
+        Debug.Log("POPULATE WOLF");
+        GameObject wolf = Instantiate(wolfModel);
+
+        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(8f, 13f), UnityEngine.Random.Range(-3f, 3f), 0f);
+        wolf.transform.position = pos;
+    }
+
+    void CreateTree()
     {
         int index = UnityEngine.Random.Range(0, obstacleModels.Length);
         GameObject obstacle = Instantiate(obstacleModels[index]);
@@ -41,13 +48,19 @@ public class ObstaclesGenerator : MonoBehaviour {
         obstacles.Add(obstacle);
     }
 
-    void CreateWolf()
+    IEnumerator PopulateTrees()
     {
-        Debug.Log("POPULATE WOLF");
-        GameObject wolf = Instantiate(wolfModel);
+        for (;;)
+        {
+            int quantity = UnityEngine.Random.Range(0, maxTreesPerBatch);
 
-        Vector3 pos = new Vector3(Camera.main.transform.position.x + UnityEngine.Random.Range(8f, 13f), UnityEngine.Random.Range(-3f, 3f), 0f);
-        wolf.transform.position = pos;
+            for (int i = 0; i < quantity; i++)
+            {
+                CreateTree();
+            }
+
+            yield return new WaitForSeconds(intervalSecondTree);
+        }
     }
 
     IEnumerator TryToPutWolf()
